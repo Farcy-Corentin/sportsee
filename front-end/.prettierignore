@@ -1,0 +1,12 @@
+**/.git
+**/.svn
+**/.hg
+*.css
+*.scss
+react-app-env.d.ts
+node_modules
+package.json
+pnpm-lock.yaml
+tsconfig.json
+public
+.prettierrc.json
