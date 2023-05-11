@@ -1,23 +1,17 @@
-import { fetchUser } from "../api/api.ts"
-import UserEntity from "../user/UserEntity.ts"
-import { useState } from "react"
-import UserFactory from "../user/UserFactory.ts"
+import { useFetch } from '../services/useFetch.ts'
+import UserFactory from '../user/UserFactory.ts'
+import { getUsersById } from '../data/mockedUser.ts'
+import { UserApiResponse } from '../user/UserApiResponseInterface.ts'
 
 export const useUser = (id: number) => {
-  const [user, setUser] = useState<UserEntity | undefined>(undefined)
-  const [error, setError] = useState<Error | undefined>(undefined)
-  
-  fetchUser(id).then((response) => {
-    return response instanceof Error
-      ? setError(response)
-      : setUser(UserFactory.createUserFromApi(response))
-  })
-  
-  const isLoading = !user && !error
+  const { data, error, isLoading } = useFetch(
+    '/user/:id',
+    { id },
+    async (): Promise<UserApiResponse> => {
+      return getUsersById(id)
+    }
+  )
+  const user = UserFactory.createUserFromApi(data)
 
-  return {
-    user,
-    isLoading,
-    error,
-  }
+  return { user, error, isLoading }
 }
