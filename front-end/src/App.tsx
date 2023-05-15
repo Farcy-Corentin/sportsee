@@ -10,15 +10,17 @@ function App(): JSX.Element {
       padding: 0;
       box-sizing: border-box;
     }
+
     body {
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
-      width: 100vw;
+      width: 100%;
     }
 
     #root {
+      width: 100%;
       height: 100%;
     }
 
