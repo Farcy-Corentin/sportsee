@@ -1,4 +1,7 @@
-import { ActivityApiResponse } from './ActivityApiResponseInterface.ts'
+import {
+  ActivityApiResponse,
+  SessionApiResponse,
+} from './ActivityApiResponseInterface.ts'
 import ActivityEntity from './ActivityEntity.ts'
 
 export default class ActivityFactory {
@@ -9,8 +12,13 @@ export default class ActivityFactory {
 
     const activities = response.data
 
-    return activities.sessions.map((activity: ActivityEntity, index) => {
-      return new ActivityEntity(index + 1, activity.kilogram, activity.calories)
+    return activities.sessions.map((session: SessionApiResponse, index) => {
+      return new ActivityEntity(
+        typeof session.day === 'string' ? index + 1 : session.day,
+        session.kilogram,
+        session.calories,
+        session.sessionLength
+      )
     })
   }
 }

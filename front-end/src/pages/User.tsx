@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useEffect } from 'react'
 import { BarChartWrapper } from '../ui/BarChartWrapper.tsx'
 import styled from '@emotion/styled'
+import { LineChartWrapper } from '../ui/LineChartWrapper.tsx'
 
 const Container = styled.div`
   width: 80vw;
@@ -33,6 +34,7 @@ export const User = () => {
       <h2>Félicitation ! vous avez explosé vos objectifs hier 👏</h2>
       <div>
         <BarChartWrapper />
+        <LineChartWrapper />
       </div>
     </Container>
   )
