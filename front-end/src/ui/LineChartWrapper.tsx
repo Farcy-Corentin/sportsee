@@ -117,6 +117,7 @@ export const LineChartWrapper = () => {
               fontSize: 12,
               fontWeight: 500,
             }}
+            axisLine={false}
           />
           <YAxis
             dataKey="sessionLength"

@@ -4,12 +4,25 @@ import { useEffect } from 'react'
 import { BarChartWrapper } from '../ui/BarChartWrapper.tsx'
 import styled from '@emotion/styled'
 import { LineChartWrapper } from '../ui/LineChartWrapper.tsx'
+import { RadarChartWrapper } from '../ui/RadarChartWrapper.tsx'
 
 const Container = styled.div`
   width: 80vw;
   height: 100%;
   padding: 40px 109px 20px 90px;
   margin: auto;
+`
+
+const AnalyticSection = styled.section`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+`
+
+const AnalyticSectionDetails = styled.div`
+  display: flex;
+  gap: 30px;
 `
 export const User = () => {
   const params = useParams()
@@ -32,10 +45,13 @@ export const User = () => {
     <Container>
       <h1>{user?.fullName}</h1>
       <h2>Félicitation ! vous avez explosé vos objectifs hier 👏</h2>
-      <div>
+      <AnalyticSection>
         <BarChartWrapper />
-        <LineChartWrapper />
-      </div>
+        <AnalyticSectionDetails>
+          <LineChartWrapper />
+          <RadarChartWrapper />
+        </AnalyticSectionDetails>
+      </AnalyticSection>
     </Container>
   )
 }
