@@ -10,7 +10,7 @@ import {
   XAxis,
   YAxis,
 } from 'recharts'
-import { useEffect } from 'react'
+import { FC, useEffect } from 'react'
 import styled from '@emotion/styled'
 
 const BarchartTooltip = styled.div`
@@ -61,7 +61,9 @@ export const BarChartWrapper = (): JSX.Element => {
     })
   })
 
-  const CustomTooltip: React.FC<any> = ({ active, payload }) => {
+  console.log({ data })
+
+  const CustomTooltip: FC<any> = ({ active, payload }) => {
     if (active && payload && payload.length) {
       return (
         <BarchartTooltip>
