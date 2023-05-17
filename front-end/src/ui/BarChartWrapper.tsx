@@ -22,7 +22,7 @@ const BarchartTooltip = styled.div`
 `
 
 const Container = styled.div`
-  width: 80vw;
+  width: 100%;
   height: 320px;
   padding: 40px 0 20px 100px;
   background: #fbfbfb;
@@ -60,8 +60,6 @@ export const BarChartWrapper = (): JSX.Element => {
       calories: calories,
     })
   })
-
-  console.log({ data })
 
   const CustomTooltip: FC<any> = ({ active, payload }) => {
     if (active && payload && payload.length) {
