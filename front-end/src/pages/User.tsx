@@ -5,6 +5,7 @@ import { BarChartWrapper } from '../ui/BarChartWrapper.tsx'
 import styled from '@emotion/styled'
 import { LineChartWrapper } from '../ui/LineChartWrapper.tsx'
 import { RadarChartWrapper } from '../ui/RadarChartWrapper.tsx'
+import { RadialBarChartWrapper } from '../ui/RadialBarChartWrapper.tsx'
 
 const Container = styled.div`
   width: 80vw;
@@ -22,6 +23,9 @@ const AnalyticSection = styled.section`
 
 const AnalyticSectionDetails = styled.div`
   display: flex;
+  flex-wrap: nowrap;
+  height: 100%;
+  width: 100%;
   gap: 30px;
 `
 export const User = () => {
@@ -43,13 +47,14 @@ export const User = () => {
 
   return (
     <Container>
-      <h1>{user?.fullName}</h1>
+      <h1>{user?.userInfos.fullName}</h1>
       <h2>Félicitation ! vous avez explosé vos objectifs hier 👏</h2>
       <AnalyticSection>
         <BarChartWrapper />
         <AnalyticSectionDetails>
           <LineChartWrapper />
           <RadarChartWrapper />
+          <RadialBarChartWrapper />
         </AnalyticSectionDetails>
       </AnalyticSection>
     </Container>

@@ -1,17 +1,16 @@
-
 export interface UserApiResponse {
   data: {
-    id: number,
+    id: number
     userInfos: {
-      firstName: string,
-      lastName: string,
+      firstName: string
+      lastName: string
       age: number
-    },
-    todayScore: number,
+    }
+    todayScore: number
     keyData: {
-      calorieCount: number,
-      proteinCount: number,
-      carbohydrateCount: number,
+      calorieCount: number
+      proteinCount: number
+      carbohydrateCount: number
       lipidCount: number
     }
   }
