@@ -1,40 +1,38 @@
+import { UserInfos } from './dto/UserInfos.ts'
+import { KeyData } from './dto/KeyData.ts'
+import { ScorePercentage } from './valueobjects/ScorePourcentage.ts'
 
-export default class UserEntity
-{
+export default class UserEntity {
   private _id: number
-  private _age: number
-  private _firstName: string
-  private _lastName: string
+  private _userInfos: UserInfos
+  private _score: ScorePercentage
+  private _keyData: KeyData
 
   public constructor(
     id: number,
-    age: number,
-    firstName: string,
-    lastName: string,
+    userInfos: UserInfos,
+    score: number,
+    keyData: KeyData
   ) {
     this._id = id
-    this._age = age
-    this._firstName = firstName
-    this._lastName = lastName
+    this._userInfos = userInfos
+    this._score = this._score = new ScorePercentage(score)
+    this._keyData = keyData
   }
 
   get id(): number {
     return this._id
   }
 
-  get age(): number {
-    return this._age
+  get userInfos(): UserInfos {
+    return this._userInfos
   }
 
-  get firstName(): string {
-    return this._firstName
+  get score(): ScorePercentage {
+    return this._score
   }
 
-  get lastName(): string {
-    return this._lastName
-  }
-
-  get fullName(): string {
-    return `${this.firstName} ${this.lastName}`
+  get keyData(): KeyData {
+    return this._keyData
   }
 }
