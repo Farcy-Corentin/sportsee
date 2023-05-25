@@ -1,7 +1,7 @@
 import UserEntity from './UserEntity.ts'
 import { UserApiResponse } from './UserApiResponseInterface.ts'
-import { UserInfos } from './dto/UserInfos.ts'
-import { KeyData } from './dto/KeyData.ts'
+import UserInfos from './UserInfos.ts'
+import { KeyDataFactory } from './KeyData/KeyDataFactory.ts'
 
 export default class UserFactory {
   public static createUserFromApi(
@@ -20,7 +20,7 @@ export default class UserFactory {
         user.userInfos.age
       ),
       user.todayScore,
-      new KeyData(
+      KeyDataFactory.createFromCounts(
         user.keyData.calorieCount,
         user.keyData.proteinCount,
         user.keyData.carbohydrateCount,

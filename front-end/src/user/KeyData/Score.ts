@@ -1,4 +1,4 @@
-export class ScorePercentage {
+export default class Score {
   private readonly _value: number
 
   constructor(value: number) {
@@ -13,6 +13,6 @@ export class ScorePercentage {
   }
 
   get percentage(): number {
-    return this._value * 100
+    return parseInt(`${this.value * 100}`)
   }
 }

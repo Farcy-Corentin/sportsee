@@ -6,19 +6,32 @@ import styled from '@emotion/styled'
 import { LineChartWrapper } from '../ui/LineChartWrapper.tsx'
 import { RadarChartWrapper } from '../ui/RadarChartWrapper.tsx'
 import { RadialBarChartWrapper } from '../ui/RadialBarChartWrapper.tsx'
+import { KeyDataCards } from '../ui/KeyDataCards.tsx'
 
 const Container = styled.div`
   width: 80vw;
   height: 100%;
   padding: 40px 109px 20px 90px;
   margin: auto;
+
+  @media (min-width: 1024px) {
+    width: 95vw;
+  }
 `
 
 const AnalyticSection = styled.section`
   display: flex;
-  flex-direction: column;
+  gap: 31px;
   height: 100%;
   width: 100%;
+`
+
+const ChartsWrapper = styled.div`
+  width: 80%;
+`
+
+const KeyDataWrapper = styled.div`
+  width: 20%;
 `
 
 const AnalyticSectionDetails = styled.div`
@@ -50,12 +63,17 @@ export const User = () => {
       <h1>{user?.userInfos.fullName}</h1>
       <h2>Félicitation ! vous avez explosé vos objectifs hier 👏</h2>
       <AnalyticSection>
-        <BarChartWrapper />
-        <AnalyticSectionDetails>
-          <LineChartWrapper />
-          <RadarChartWrapper />
-          <RadialBarChartWrapper />
-        </AnalyticSectionDetails>
+        <ChartsWrapper>
+          <BarChartWrapper />
+          <AnalyticSectionDetails>
+            <LineChartWrapper />
+            <RadarChartWrapper />
+            <RadialBarChartWrapper />
+          </AnalyticSectionDetails>
+        </ChartsWrapper>
+        <KeyDataWrapper>
+          {user?.keyData && <KeyDataCards keyData={user.keyData} />}
+        </KeyDataWrapper>
       </AnalyticSection>
     </Container>
   )
