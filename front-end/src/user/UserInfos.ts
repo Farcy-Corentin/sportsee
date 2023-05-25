@@ -1,7 +1,7 @@
-export class UserInfos {
-  private _firstName: string
-  private _lastName: string
-  private _age: number
+export default class UserInfos {
+  private readonly _firstName: string
+  private readonly _lastName: string
+  private readonly _age: number
 
   constructor(firstName: string, lastName: string, age: number) {
     this._firstName = firstName
