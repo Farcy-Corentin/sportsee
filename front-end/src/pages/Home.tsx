@@ -1,7 +1,9 @@
-import { useEffect, useState } from 'react'
-import type { FormEvent } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import type {FormEvent} from 'react'
+import {Dispatch, SetStateAction, useEffect, useState} from 'react'
+import {useNavigate} from 'react-router-dom'
 import styled from '@emotion/styled'
+import {useUser} from '../hooks/useUser.ts'
+import {DataErrorType} from "../data/mockAxiosError.ts"
 
 const Container = styled.div`
   width: 80vw;
@@ -31,23 +33,36 @@ const Form = styled('form')`
   }
 `
 
-export const Home = (): JSX.Element => {
-  const [userId, setUserId] = useState<number | null>(null)
-  const [messageError, setMessageError] = useState('')
+interface LoginProps {
+  userId: number
+  setErrorMessage: Dispatch<SetStateAction<string>>
+}
+
+function Login({ userId, setErrorMessage }: LoginProps) {
+  const { user, error } = useUser(userId)
   const navigate = useNavigate()
-  const location = useLocation()
 
   useEffect(() => {
-    if (location.state !== null) {
-      const { error } = location.state
-
-      setMessageError(error.message)
+    if (error) {
+      const { data } = error.response as { data: DataErrorType }
+      setErrorMessage(JSON.stringify(data).replace(/^"*|"*$/g, ''))
     }
-  }, [location.state])
+    
+    if (user) {
+      navigate(`user/${userId}`)
+    }
+  }, [error, user])
+
+  return <></>
+}
+export const Home = (): JSX.Element => {
+  const [userId, setUserId] = useState<number | null>(null)
+  const [isSubmitted, setIsSubmitted] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    navigate(`/user/${userId}`)
+    setIsSubmitted(true)
   }
 
   return (
@@ -60,13 +75,23 @@ export const Home = (): JSX.Element => {
               type="text"
               name="id"
               placeholder={'Rentrer votre identifiant...'}
-              onChange={(e) => setUserId(parseInt(e.target.value))}
+              onChange={(e) => {
+                setIsSubmitted(false)
+                if (e.target.value === '') {
+                  setErrorMessage('')
+                }
+                setUserId(parseInt(e.target.value))
+              }}
             />
           </label>
-          {messageError && <p>{messageError}</p>}
-          <button type="submit" disabled={!userId}>
-            Soumettre
-          </button>
+          {isSubmitted && (
+            <Login
+              userId={userId as number}
+              setErrorMessage={setErrorMessage}
+            />
+          )}
+          {errorMessage && <p>{errorMessage}</p>}
+          <button type="submit">Soumettre</button>
         </div>
       </Form>
     </Container>

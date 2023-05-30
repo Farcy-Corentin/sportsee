@@ -1,5 +1,5 @@
-import { RouteResponse } from '../services/routes.ts'
-import { AxiosError } from 'axios'
+import {RouteResponse} from '../services/routes.ts'
+import mockAxiosError from "./mockAxiosError.ts"
 
 const userMainData = [
   {
@@ -39,7 +39,7 @@ export async function getUsersById(
 ): Promise<RouteResponse<'/user/:id'>> {
   const user = userMainData.find((user) => user.id === id)
   if (user === undefined) {
-    throw new AxiosError('Unknown user', '404')
+    throw mockAxiosError('Unknown user', '404', '[mock] can not get user')
   }
   return { data: user }
 }
