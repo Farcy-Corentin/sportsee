@@ -24,8 +24,7 @@ interface CursorProps {
 
 const Container = styled.div`
   width: 100%;
-  height: 220px;
-  margin-top: 20px;
+  height: 263px;
   background: #ff0000;
   border-radius: 5px;
   overflow: hidden;

@@ -1,6 +1,5 @@
 import { useUser } from '../hooks/useUser.ts'
-import { useNavigate, useParams } from 'react-router-dom'
-import { useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 import { BarChartWrapper } from '../ui/BarChartWrapper.tsx'
 import styled from '@emotion/styled'
 import { LineChartWrapper } from '../ui/LineChartWrapper.tsx'
@@ -9,50 +8,70 @@ import { RadialBarChartWrapper } from '../ui/RadialBarChartWrapper.tsx'
 import { KeyDataCards } from '../ui/KeyDataCards.tsx'
 
 const Container = styled.div`
-  width: 80vw;
   height: 100%;
-  padding: 40px 109px 20px 90px;
-  margin: auto;
+  flex: 1;
+  overflow-y: auto;
+  padding: 68px 40px 86px 20px;
 
-  @media (min-width: 1024px) {
-    width: 95vw;
+  @media (min-width: 1025px) {
+    padding: 68px 107px 86px 90px;
   }
+`
+
+const Title = styled.h1`
+  display: flex;
+  font-size: 2rem;
+  margin-bottom: 41px;
+`
+
+const UserName = styled.span`
+  margin: 0 0 0 10px;
+  color: red;
+`
+
+const Description = styled.p`
+  font-size: 1.125rem;
+  margin-bottom: 77px;
 `
 
 const AnalyticSection = styled.section`
   display: flex;
-  gap: 31px;
-  height: 100%;
+  flex-wrap: wrap;
   width: 100%;
+
+  @media (min-width: 1024px) {
+    flex-wrap: nowrap;
+  }
 `
 
 const ChartsWrapper = styled.div`
-  width: 80%;
+  width: 100%;
+
+  @media (min-width: 1024px) {
+    width: 80%;
+  }
 `
 
 const KeyDataWrapper = styled.div`
-  width: 20%;
+  width: 100%;
+
+  @media (min-width: 1024px) {
+    width: 20%;
+    margin-left: 31px;
+  }
 `
 
 const AnalyticSectionDetails = styled.div`
   display: flex;
   flex-wrap: nowrap;
-  height: 100%;
   width: 100%;
   gap: 30px;
 `
 export const User = () => {
   const params = useParams()
-  const navigate = useNavigate()
 
   const id = parseInt(params.id as string)
-  const { user, isLoading, error } = useUser(id)
-
-  useEffect(() => {
-    if (user === undefined && error) {
-      navigate('/', { state: { error: error } })
-    }
-  }, [user, error, navigate])
+  const { user, isLoading } = useUser(id)
 
   if (isLoading) {
     return <p>Loading ...</p>
@@ -60,8 +79,12 @@ export const User = () => {
 
   return (
     <Container>
-      <h1>{user?.userInfos.fullName}</h1>
-      <h2>Félicitation ! vous avez explosé vos objectifs hier 👏</h2>
+      <Title>
+        Bonjour <UserName>{user?.userInfos.fullName}</UserName>
+      </Title>
+      <Description>
+        Félicitation ! vous avez explosé vos objectifs hier 👏
+      </Description>
       <AnalyticSection>
         <ChartsWrapper>
           <BarChartWrapper />

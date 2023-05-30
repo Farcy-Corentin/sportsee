@@ -22,8 +22,7 @@ const Circle = styled.div`
 
 const Container = styled.div`
   width: 100%;
-  height: 220px;
-  margin-top: 20px;
+  height: 263px;
   padding: 14px;
   background: #fbfbfb;
   border-radius: 5px;

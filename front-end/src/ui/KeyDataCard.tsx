@@ -14,17 +14,47 @@ interface KeyDataCardProps {
 
 const KeyDataCardWrapper = styled.div`
   display: flex;
+  align-items: center;
+  height: 124px;
   background: #fbfbfb;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.0212249);
   border-radius: 5px;
-  padding: 32px;
-  gap: 46px;
+  padding: 16px;
+
+  @media (min-width: 1025px) {
+    padding: 32px;
+  }
 `
 
-const IconWrapper = styled.div((props) => ({
-  padding: '21px',
-  background: props.color,
-}))
+const IconWrapper = styled.div`
+  padding: 21px;
+  margin-right: 24px;
+  border-radius: 6px;
+  background: ${(props) => props.color};
+`
+
+const KeyWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
+const KeyValue = styled.p`
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+  font-size: 20px;
+
+  @media (min-width: 1025px) {
+    display: flex;
+    flex-direction: row;
+  }
+`
+
+const KeyTitle = styled.p`
+  font-size: 14px;
+  font-weight: bold;
+  color: #74798c;
+`
 
 export const KeyDataCard = ({
   keyData,
@@ -53,13 +83,13 @@ export const KeyDataCard = ({
   return (
     <KeyDataCardWrapper>
       <IconWrapper color={backgroundColor}>{iconElement}</IconWrapper>
-      <div>
-        <p>
+      <KeyWrapper>
+        <KeyValue>
           {keyData.value}
-          {keyData.unit}
-        </p>
-        <p>{title}</p>
-      </div>
+          <span>{keyData.unit}</span>
+        </KeyValue>
+        <KeyTitle>{title}</KeyTitle>
+      </KeyWrapper>
     </KeyDataCardWrapper>
   )
 }

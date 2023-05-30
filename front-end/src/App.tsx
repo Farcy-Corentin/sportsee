@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Home } from './pages/Home.tsx'
 import { User } from './pages/User.tsx'
 import { Global, css } from '@emotion/react'
+import { Layout } from './ui/Layout.tsx'
 
 function App(): JSX.Element {
   const styles = css`
@@ -13,8 +14,6 @@ function App(): JSX.Element {
 
     body {
       display: flex;
-      justify-content: center;
-      align-items: center;
       height: 100vh;
       width: 100%;
     }
@@ -22,6 +21,12 @@ function App(): JSX.Element {
     #root {
       width: 100%;
       height: 100%;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      align-items: stretch;
     }
 
     input {
@@ -59,7 +64,13 @@ function App(): JSX.Element {
     },
     {
       path: 'user/:id',
-      element: <User />,
+      element: <Layout />,
+      children: [
+        {
+          path: '',
+          element: <User />,
+        },
+      ],
     },
   ])
   return (

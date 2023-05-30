@@ -24,11 +24,11 @@ const BarchartTooltip = styled.div`
 const Container = styled.div`
   width: 100%;
   height: 320px;
-  padding: 40px 0 20px 100px;
   background: #fbfbfb;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.0212249);
   border-radius: 5px;
-  margin: 0 auto 30px auto;
+  padding: 32px;
+  margin-bottom: 28px;
 `
 
 const Title = styled.p`
@@ -80,7 +80,7 @@ export const BarChartWrapper = (): JSX.Element => {
       <ResponsiveContainer height="100%" width="100%">
         <BarChart
           width={500}
-          height={300}
+          height={320}
           margin={{
             top: 0,
             right: 15,
