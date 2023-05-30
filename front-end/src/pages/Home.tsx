@@ -1,10 +1,9 @@
-import { Dispatch, SetStateAction, useEffect, useState } from 'react'
-import type { FormEvent } from 'react'
-import { useNavigate } from 'react-router-dom'
+import type {FormEvent} from 'react'
+import {Dispatch, SetStateAction, useEffect, useState} from 'react'
+import {useNavigate} from 'react-router-dom'
 import styled from '@emotion/styled'
-import { useUser } from '../hooks/useUser.ts'
-import { isProduction } from '../services/envManager.ts'
-import { AxiosError } from 'axios'
+import {useUser} from '../hooks/useUser.ts'
+import {DataErrorType} from "../data/mockAxiosError.ts"
 
 const Container = styled.div`
   width: 80vw;
@@ -38,21 +37,17 @@ interface LoginProps {
   userId: number
   setErrorMessage: Dispatch<SetStateAction<string>>
 }
+
 function Login({ userId, setErrorMessage }: LoginProps) {
   const { user, error } = useUser(userId)
   const navigate = useNavigate()
 
-  console.log(error)
-
   useEffect(() => {
     if (error) {
-      if (isProduction()) {
-        setErrorMessage(error.response?.data)
-      } else {
-        setErrorMessage(error.message)
-      }
+      const { data } = error.response as { data: DataErrorType }
+      setErrorMessage(JSON.stringify(data).replace(/^"*|"*$/g, ''))
     }
-
+    
     if (user) {
       navigate(`user/${userId}`)
     }
