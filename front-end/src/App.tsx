@@ -3,6 +3,7 @@ import { Home } from './pages/Home.tsx'
 import { User } from './pages/User.tsx'
 import { Global, css } from '@emotion/react'
 import { Layout } from './ui/Layout.tsx'
+import { RootErrorBoundary } from './pages/Error.tsx'
 
 function App(): JSX.Element {
   const styles = css`
@@ -61,10 +62,12 @@ function App(): JSX.Element {
     {
       path: '/',
       element: <Home />,
+      errorElement: <RootErrorBoundary />,
     },
     {
       path: 'user/:id',
       element: <Layout />,
+      errorElement: <RootErrorBoundary />,
       children: [
         {
           path: '',

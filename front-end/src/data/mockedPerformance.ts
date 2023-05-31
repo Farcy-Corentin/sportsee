@@ -1,5 +1,5 @@
 import { RouteResponse } from '../services/routes.ts'
-import { AxiosError } from 'axios'
+import mockAxiosError from './mockAxiosError.ts'
 
 const userPerformancesMainData = [
   {
@@ -84,8 +84,9 @@ export async function getPerformancesByUser(
   const performance = userPerformancesMainData.find(
     (performance) => performance.userId === id
   )
+
   if (performance === undefined) {
-    throw new AxiosError('Unknown performance for this user', '404')
+    throw mockAxiosError('Unknown user', '404', '[mock] can not get user')
   }
 
   return { data: performance }

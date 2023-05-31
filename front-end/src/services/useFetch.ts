@@ -1,9 +1,9 @@
 import axios from './AxiosService.ts'
-import {useEffect, useState} from 'react'
-import {RouteResponse, RoutesPath} from './routes.ts'
-import {isProduction} from './envManager.ts'
-import {AxiosError} from 'axios'
-import {MockAxiosError} from "../data/mockAxiosError.ts"
+import { useEffect, useState } from 'react'
+import { RouteResponse, RoutesPath } from './routes.ts'
+import { isProduction } from './envManager.ts'
+import { AxiosError } from 'axios'
+import { MockAxiosError } from '../data/mockAxiosError.ts'
 
 export interface FetchResponse<ApiResponse> {
   data: ApiResponse | undefined
@@ -19,13 +19,18 @@ export const useFetch = <R extends RoutesPath>(
   mock?: () => Promise<RouteResponse<R>>
 ): FetchResponse<RouteResponse<R>> => {
   const [data, setData] = useState<RouteResponse<R> | undefined>(undefined)
-  const [error, setError] = useState<MockAxiosError | AxiosError | undefined>(undefined)
+  const [error, setError] = useState<MockAxiosError | AxiosError | undefined>(
+    undefined
+  )
 
   for (const [key, value] of Object.entries(params)) {
     path = path.replace(`:${key}`, value.toString()) as R
   }
 
-  function setResponse(data?: RouteResponse<R>, error?: MockAxiosError | AxiosError) {
+  function setResponse(
+    data?: RouteResponse<R>,
+    error?: MockAxiosError | AxiosError
+  ) {
     setData(data)
     setError(error)
   }
@@ -34,7 +39,7 @@ export const useFetch = <R extends RoutesPath>(
     if (isProduction()) {
       axios
         .get(`${path}`)
-        .then(({data}: { data: RouteResponse<R> }) => setResponse(data))
+        .then(({ data }: { data: RouteResponse<R> }) => setResponse(data))
         .catch((error: AxiosError) => setResponse(undefined, error))
     } else if (mock) {
       mock()

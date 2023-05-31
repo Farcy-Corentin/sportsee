@@ -1,5 +1,5 @@
 import { RouteResponse } from '../services/routes.ts'
-import { AxiosError } from 'axios'
+import mockAxiosError from './mockAxiosError.ts'
 
 const userAverageSessionsMainData = [
   {
@@ -76,8 +76,9 @@ export async function getAverageActivityByUser(
   const sessions = userAverageSessionsMainData.find(
     (session) => session.userId === id
   )
+
   if (sessions === undefined) {
-    throw new AxiosError('Unknown sessions for this user', '404')
+    throw mockAxiosError('Unknown user', '404', '[mock] can not get user')
   }
 
   return { data: sessions }
