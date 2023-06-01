@@ -63,10 +63,12 @@ function Login({ userId, setErrorMessage }: LoginProps) {
 export const Home = (): JSX.Element => {
   const [userId, setUserId] = useState<number | null>(null)
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [canSubmitted, setCanSubmitted] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
 
   const handleUserIdInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsSubmitted(false)
+    setCanSubmitted(false)
     const value = e.target.value
 
     if (value === '') {
@@ -79,6 +81,7 @@ export const Home = (): JSX.Element => {
       return setErrorMessage("L'identifiant doit être un nombre.")
     }
 
+    setCanSubmitted(true)
     setUserId(parseInt(value))
     return setErrorMessage('')
   }
@@ -87,12 +90,16 @@ export const Home = (): JSX.Element => {
     e.preventDefault()
 
     if (userId === null) {
+      setCanSubmitted(false)
       return
     }
 
     if (isNaN(userId)) {
+      setCanSubmitted(false)
       return
     }
+
+    setCanSubmitted(true)
     return setIsSubmitted(true)
   }
 
@@ -116,7 +123,9 @@ export const Home = (): JSX.Element => {
             />
           )}
           {errorMessage && <p>{errorMessage}</p>}
-          <button type="submit">Soumettre</button>
+          <button type="submit" disabled={errorMessage ? true : !canSubmitted}>
+            Soumettre
+          </button>
         </div>
       </Form>
     </Container>
