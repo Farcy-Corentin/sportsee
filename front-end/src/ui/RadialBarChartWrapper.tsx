@@ -27,6 +27,7 @@ const Container = styled.div`
   background: #fbfbfb;
   border-radius: 5px;
   position: relative;
+  overflow: hidden;
 `
 
 const LegendWrapper = styled.div`

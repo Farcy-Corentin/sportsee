@@ -11,7 +11,7 @@ const Container = styled.div`
   height: 100%;
   flex: 1;
   overflow-y: auto;
-  padding: 68px 40px 86px 20px;
+  padding: 68px 20px 86px 20px;
 
   @media (min-width: 1025px) {
     padding: 68px 107px 86px 90px;

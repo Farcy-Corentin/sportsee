@@ -4,9 +4,16 @@ import { User } from './pages/User.tsx'
 import { Global, css } from '@emotion/react'
 import { Layout } from './ui/Layout.tsx'
 import { RootErrorBoundary } from './pages/Error.tsx'
+import RobotoMedium from './assets/font/Roboto-Medium.ttf'
 
 function App(): JSX.Element {
   const styles = css`
+    @font-face {
+      font-family: 'Roboto', sans-serif;
+      src: url(${RobotoMedium}) format('truetype');
+      font-weight: 500;
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -17,6 +24,7 @@ function App(): JSX.Element {
       display: flex;
       height: 100vh;
       width: 100%;
+      font-family: 'Roboto', sans-serif;
     }
 
     #root {
